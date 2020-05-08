@@ -1,0 +1,17 @@
+zuul:
+  routes:
+    account-details:
+      path: /accounts/**
+      serviceId: ACCOUNT-DETAILS
+    fund-transfer:
+      path: /fundtransfer/**
+      serviceId: FUND-TRANSFER
+    user-details:
+      path: /User/**
+      servicId: USER-DETAILS
+    transactions:
+      path: /transactions/**
+      serviceId: TRANSACTIONS-SERVICE
+    login:
+      path: /login/**
+      serviceId: LOGIN-SERVICE
