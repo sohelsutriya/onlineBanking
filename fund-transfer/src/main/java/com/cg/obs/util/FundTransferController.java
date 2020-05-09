@@ -5,6 +5,8 @@ package com.cg.obs.util;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +32,8 @@ public class FundTransferController {
 	@Autowired
 	FundTransferService service;
 
+	private static final Logger logger = LoggerFactory.getLogger(FundTransferController.class);
+	
 	@PostMapping(path = "/fundtransfer/from/{senderAccountNo}/to/{recieverAccountNo}/{amount}")
 	@ApiOperation(value = "fundTransfer", nickname = "fundTransfer")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = Transaction.class),

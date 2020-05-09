@@ -6,6 +6,8 @@ package com.cg.obs.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cg.obs.model.User;
 import com.cg.obs.service.UserService;
 
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -30,6 +33,8 @@ import io.swagger.annotations.ApiResponses;
 public class UserController {
 	@Autowired
 	public UserService service;
+	
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	@GetMapping(path = "/User")
 	@ApiOperation(value = "retrieveAllUsers", nickname = "retrieveAllUsers")

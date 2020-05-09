@@ -3,8 +3,14 @@
  */
 package com.cg.obs.util;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
 
 import com.cg.obs.model.Account;
 import com.cg.obs.service.AccountService;
@@ -32,6 +39,8 @@ import io.swagger.annotations.ApiResponses;
 public class AccountController {
 	@Autowired
 	private AccountService service;
+	
+	private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
 
 	@GetMapping(path = "/accounts/get")
 	@ApiOperation(value = "getAllAccounts", nickname = "getAllAccounts")
@@ -76,6 +85,7 @@ public class AccountController {
 			@ApiResponse(code = 500, message = "Failure", response = Account.class) })
 	public String addAccount(@RequestBody Account account) {
 		System.out.println("this function will add account in database");
+		account.setOpeningDate(Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
 		service.save(account);
 		return "account added";
 	}
