@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -21,10 +23,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class Transaction {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private String transactionId;
+	private Integer transactionId;
 	@Column
-	private TransactionType transactionType;
+	private String transactionType;
 	@Column
+	@Temporal(TemporalType.DATE)
 	@JsonFormat(pattern = "dd-mm-yyyy")
 	private Date transactionDate;
 	@Column
@@ -36,7 +39,7 @@ public class Transaction {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Transaction(String transactionId, TransactionType transactionType, Date transactionDate, double amount,
+	public Transaction(String transactionType, Date transactionDate, double amount,
 			String accountNo) {
 		super();
 		this.transactionId = transactionId;
@@ -46,19 +49,19 @@ public class Transaction {
 		this.accountNo = accountNo;
 	}
 
-	public String getTransactionId() {
+	public Integer getTransactionId() {
 		return transactionId;
 	}
 
-	public void setTransactionId(String transactionId) {
+	public void setTransactionId(Integer transactionId) {
 		this.transactionId = transactionId;
 	}
 
-	public TransactionType getTransactionType() {
+	public String getTransactionType() {
 		return transactionType;
 	}
 
-	public void setTransactionType(TransactionType transactionType) {
+	public void setTransactionType(String transactionType) {
 		this.transactionType = transactionType;
 	}
 

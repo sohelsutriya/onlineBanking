@@ -13,6 +13,6 @@ import com.cg.obs.model.Transaction;
  *
  */
 @Service
-public interface TransactionService extends JpaRepository<Transaction, String>{
+public interface TransactionService extends JpaRepository<Transaction, Integer>{
 	
 }

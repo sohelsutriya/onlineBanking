@@ -10,8 +10,8 @@ import java.util.Date;
  *
  */
 public class Transaction {
-	private String transactionId;
-	private TransactionType transactionType;
+	private Integer transactionId;
+	private String transactionType;
 	private Date transactionDate;
 	private double amount;
 	private String accountNo;
@@ -20,7 +20,7 @@ public class Transaction {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Transaction(String transactionId, TransactionType transactionType, Date transactionDate, double amount,
+	public Transaction(String transactionType, Date transactionDate, double amount,
 			String accountNo) {
 		super();
 		this.transactionId = transactionId;
@@ -30,19 +30,19 @@ public class Transaction {
 		this.accountNo = accountNo;
 	}
 
-	public String getTransactionId() {
+	public Integer getTransactionId() {
 		return transactionId;
 	}
 
-	public void setTransactionId(String transactionId) {
+	public void setTransactionId(Integer transactionId) {
 		this.transactionId = transactionId;
 	}
 
-	public TransactionType getTransactionType() {
+	public String getTransactionType() {
 		return transactionType;
 	}
 
-	public void setTransactionType(TransactionType transactionType) {
+	public void setTransactionType(String transactionType) {
 		this.transactionType = transactionType;
 	}
 

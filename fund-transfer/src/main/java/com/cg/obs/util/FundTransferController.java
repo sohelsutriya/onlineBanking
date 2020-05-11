@@ -5,8 +5,6 @@ package com.cg.obs.util;
 
 import java.util.Date;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,23 +30,23 @@ public class FundTransferController {
 	@Autowired
 	FundTransferService service;
 
-	private static final Logger logger = LoggerFactory.getLogger(FundTransferController.class);
 	
-	@PostMapping(path = "/fundtransfer/from/{senderAccountNo}/to/{recieverAccountNo}/{amount}")
 	@ApiOperation(value = "fundTransfer", nickname = "fundTransfer")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = Transaction.class),
 			@ApiResponse(code = 500, message = "Failure", response = Transaction.class) })
+	@PostMapping(path = "/fundtransfer/from/{senderAccountNo}/to/{recieverAccountNo}/{amount}")
 	public String fundTransfer(@PathVariable String senderAccountNo, @PathVariable String recieverAccountNo,
 			@PathVariable double amount) {
 		System.out.println("this will transfer funds from one account to other and update transactions also");
+		System.out.println(senderAccountNo + recieverAccountNo + amount);
 		Account senderAccount = service.getAccountByAccountNo(senderAccountNo);
 		senderAccount.setBalance(senderAccount.getBalance() - amount);
 		service.updateAccount(senderAccount);
-		service.postTransaction(new Transaction(null, TransactionType.Debit, new Date(), amount, senderAccountNo));
+		service.postTransaction(new Transaction("Debit", new Date(), amount, senderAccountNo));
 		Account recieverAccount = service.getAccountByAccountNo(recieverAccountNo);
 		recieverAccount.setBalance(recieverAccount.getBalance() + amount);
 		service.updateAccount(recieverAccount);
-		service.postTransaction(new Transaction(null, TransactionType.Credit, new Date(), amount, recieverAccountNo));
+		service.postTransaction(new Transaction("Credit", new Date(), amount, recieverAccountNo));
 		return "fund transferred";
 	}
 }
